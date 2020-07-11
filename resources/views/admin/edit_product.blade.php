@@ -9,7 +9,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Update Product</h4>
-            <form method="POST" action="{{route('update-product',$OldData->id)}}" enctype="multipart/form-data">
+            <form method="POST" action="{{url('update-product/'.$OldData->id)}}" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                 @if ($errors->any())

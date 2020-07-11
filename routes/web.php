@@ -16,8 +16,6 @@ Route::get('/','ClientController@index')->name('home');
 
 Route::get('/shop','ClientController@shop')->name('shop');
 
-Route::get('/cart','ClientController@cart')->name('cart');
-
 Route::get('/checkout','ClientController@checkout')->name('checkout');
 
 
@@ -74,23 +72,19 @@ Route::get('delete-slider/{id?}','SliderController@DeleteSlider');
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
 Route::get('edit-category/{id}','CategoryController@EditCategory')->name('edit-category');
-
 Route::post('update-category/{id}','CategoryController@UpdateCategory')->name('update-category');
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 Route::get('edit-product/{id}','ProductController@EditProduct')->name('edit-product');
-
 Route::post('update-product/{id}','ProductController@UpdateProduct')->name('update-product');
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 Route::get('edit-slider/{id}','SliderController@EditSlider')->name('edit-slider');
+Route::post('update-slider/{id}','SliderController@UpdateSlider')->name('update-slider');
 
-Route::post('update-product/{id}','SliderController@UpdateSlider')->name('update-slider');
 
+
+
+Route::get('show-product/{id}','ProductController@ShowProduct')->name('Show-ProductSingle');
+
+
+Route::get('get-checkout','PaymentProviderController@GetCheckOutId');

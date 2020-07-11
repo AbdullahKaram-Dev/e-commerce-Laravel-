@@ -20,12 +20,11 @@ class SliderController extends Controller
         if ($create) {
 
             alert('Success')->success('Added New Slider Successfully', 'Success');
-            return redirect()->route('add-slider');
-
+            return redirect()->route('show-sliders');
         } else {
 
             alert('Error')->error('Cant Add New Slider', 'Error');
-            return redirect()->route('add-slider');
+            return redirect()->route('show-sliders');
         }
 
 
@@ -39,12 +38,12 @@ class SliderController extends Controller
         if ($slider) {
 
             alert()->success('Pending Slider Successfully', 'Pending Successfully');
-            return redirect()->back();
+            return redirect()->route('show-sliders');
         } else {
 
 
             alert()->error('Pending Slider Failed', 'Pending Failed');
-            return redirect()->back();
+            return redirect()->route('show-sliders');
         }
 
     }
@@ -57,12 +56,12 @@ class SliderController extends Controller
         if ($slider) {
 
             alert()->success('Active Slider Successfully', 'Active Successfully');
-            return redirect()->back();
+            return redirect()->route('show-sliders');
         } else {
 
 
             alert()->error('Active Slider Failed', 'Active Failed');
-            return redirect()->back();
+            return redirect()->route('show-sliders');
         }
     }
 
@@ -70,16 +69,17 @@ class SliderController extends Controller
     {
         $DeleteSlider = Slider::findOrFail($id);
         $image = $DeleteSlider->slider_image;
-        unlink(public_path('slider_images/' . $image));
-        $DeleteSlider->delete();
-        if ($DeleteSlider) {
+        if (file_exists(public_path('slider_images/').$image)){
+            unlink(public_path('slider_images/').$image);
+            $DeleteSlider->delete();
 
             alert()->success('Deleted Slider Successfully', 'Deleted Successfully');
-            return redirect()->back();
-        } else {
+            return redirect()->route('show-sliders');
+        }else{
+            $DeleteSlider->delete();
 
-            alert()->error('Delete Slider Failed', 'Delete Failed');
-            return redirect()->back();
+            alert()->success('Deleted Slider Successfully', 'Deleted Successfully');
+            return redirect()->route('show-sliders');
         }
 
     }
@@ -92,7 +92,34 @@ class SliderController extends Controller
     }
     public function UpdateSlider($id,UpdateSlider $request)
     {
+        if ($request->has('slider_image')){
+            $image = time().'.'.$request->slider_image->getClientOriginalExtension();
+            $request->slider_image->move(public_path('slider_images'), $image);
+            $ArrayRequest = ['slider_image'=>$image] + $request->all();
+            $update = Slider::findOrFail($id);
+            $update->update($ArrayRequest);
+            if ($update){
 
-        
+                alert()->success('Updated Slider Successfully', 'Update Success');
+                return redirect()->route('show-sliders');
+            }
+        }else{
+
+            $update = Slider::findOrFail($id);
+            $OldImage = $update->slider_image;
+            $ArrayRequest = ['slider_image'=>$OldImage] + $request->all();
+            $update->update($ArrayRequest);
+            if ($update){
+
+
+                alert()->success('Updated Slider Successfully', 'Update Success');
+                return redirect()->route('show-sliders');
+            }else{
+
+                alert()->error('Fail To Update Slider','Fail Update');
+                return redirect()->route('show-sliders');
+
+            }
+        }
     }
 }

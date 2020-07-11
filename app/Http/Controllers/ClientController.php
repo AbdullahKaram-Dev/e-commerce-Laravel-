@@ -23,15 +23,11 @@ class ClientController extends Controller
         return view('client.shop',compact('products','categories'));
     }
 
-    public function cart()
-    {
-
-        return view('client.cart');
-    }
 
     public function checkout()
     {
 
         return view('client.checkout');
     }
+
 }

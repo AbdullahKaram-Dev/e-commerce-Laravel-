@@ -58,7 +58,7 @@
                                             @endif
 
                                             <td>
-                                                <button class="btn btn-outline-primary"><a href="{{route('edit-product',$product->id)}}">Update</a></button>
+                                                <button class="btn btn-outline-primary"><a href="{{url('edit-product/'.$product->id)}}">Update</a></button>
                                             </td>
                                             <td>
                                                 <button class="btn btn-outline-danger"><a style="color: red" href="{{url('delete-product/'.$product->id)}}">Delete</a></button>

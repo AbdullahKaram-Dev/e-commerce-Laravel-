@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Products;
 use App\Slider;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -54,4 +55,5 @@ class AdminController extends Controller
         $sliders = Slider::get();
         return view('admin.all_sliders',compact('sliders'));
     }
+
 }

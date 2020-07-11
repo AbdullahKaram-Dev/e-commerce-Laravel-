@@ -52,7 +52,7 @@
                                             </td>
                                         @endif
                                         <td>
-                                            <label class="btn btn-outline-primary"><a href="{{route('edit-slider',$slider->id)}}">Update</a></label>
+                                            <label class="btn btn-outline-primary"><a href="{{url('edit-slider/'.$slider->id)}}">Update</a></label>
                                         </td>
                                         <td>
                                             <label class="btn btn-outline-danger"><a style="color:red" href="{{url('delete-slider/'.$slider->id)}}">Delete</a></label>

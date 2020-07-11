@@ -8,7 +8,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Add Slider</h4>
-                            <form action="{{route('update-slider',$OldData->id)}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{url('update-slider/'.$OldData->id)}}" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                                 @if ($errors->any())
